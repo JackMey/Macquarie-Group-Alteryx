@@ -1,0 +1,40 @@
+.dependency-graph {
+  position: fixed;
+
+  .nodes {
+    fill: darkgray;
+  }
+  
+  .nodes text {
+    fill: white;
+  }
+
+  .node {
+    cursor: pointer;
+  }
+  
+  path {
+    stroke: black;
+    fill: black;
+    stroke-width: 2px;
+  }
+
+  &__previous-connection {
+    path {
+      stroke: red;
+      fill: red;
+    }
+  }
+
+  &__previous-tool {
+    circle {
+      fill: red;
+    }
+  }
+
+  &__current-tool {
+    circle {
+      fill: blue;
+    }
+  }
+}

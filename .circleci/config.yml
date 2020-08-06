@@ -1,0 +1,51 @@
+version: 2.1
+
+orbs:
+  node: circleci/node@1.1.6
+  aws-s3: circleci/aws-s3@1.0.15
+
+jobs:
+  build-and-test:
+    executor:
+      name: node/default
+    resource_class: medium
+    steps:
+      - attach_workspace:
+          at: /tmp/artifacts
+      - checkout
+      - node/with-cache:
+          steps:
+            - run: npm install
+      - run: npm run lint
+      - run: npm run test:ci
+      - run: npm run build:prod
+      - run: mkdir -p /tmp/artifacts/dist
+      - run: cp -r ./dist /tmp/artifacts
+      - persist_to_workspace:
+          root: /tmp/artifacts
+          paths:
+            - dist
+  publish:
+    docker:
+      - image: 'cimg/python:3.8'
+    resource_class: medium
+    steps:
+      - attach_workspace:
+          at: /tmp/artifacts
+      - aws-s3/sync:
+          aws-region: AWS_REGION
+          from: /tmp/artifacts/dist
+          overwrite: true
+          to: 's3://mqu-comp3850-g4'
+
+workflows:
+    comp3850-g4:
+      jobs:
+        - build-and-test
+        - publish:
+            requires:
+              - build-and-test
+            filters:
+              branches:
+                only:
+                  - master
