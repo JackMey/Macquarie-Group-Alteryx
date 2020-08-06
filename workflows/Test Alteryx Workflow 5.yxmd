@@ -1,0 +1,714 @@
+<?xml version="1.0"?>
+<AlteryxDocument yxmdVer="2020.1">
+  <Nodes>
+    <Node ToolID="22">
+      <GuiSettings Plugin="AlteryxGuiToolkit.ToolContainer.ToolContainer">
+        <Position x="54.00003" y="57" width="1647" height="671" />
+      </GuiSettings>
+      <Properties>
+        <Configuration>
+          <Caption>New Hire Workday to IPS Integration</Caption>
+          <Style TextColor="#314c4a" FillColor="#ecf2f2" BorderColor="#314c4a" Transparency="25" Margin="25" />
+          <Disabled value="False" />
+          <Folded value="False" />
+        </Configuration>
+        <Annotation DisplayMode="0">
+          <Name />
+          <DefaultAnnotationText />
+          <Left value="False" />
+        </Annotation>
+      </Properties>
+      <ChildNodes>
+        <Node ToolID="4">
+          <GuiSettings Plugin="AlteryxGuiToolkit.ToolContainer.ToolContainer">
+            <Position x="79.00003" y="130" width="289" height="133" />
+          </GuiSettings>
+          <Properties>
+            <Configuration>
+              <Caption>Extract Data from Workday</Caption>
+              <Style TextColor="#314c4a" FillColor="#ff8040" BorderColor="#314c4a" Transparency="25" Margin="25" />
+              <Disabled value="False" />
+              <Folded value="False" />
+            </Configuration>
+            <Annotation DisplayMode="0">
+              <Name />
+              <DefaultAnnotationText />
+              <Left value="False" />
+            </Annotation>
+          </Properties>
+          <ChildNodes>
+            <Node ToolID="1">
+              <GuiSettings Plugin="AlteryxBasePluginsGui.TextInput.TextInput">
+                <Position x="104" y="179" />
+              </GuiSettings>
+              <Properties>
+                <Configuration>
+                  <NumRows value="1" />
+                  <Fields>
+                    <Field name="URL" />
+                  </Fields>
+                  <Data>
+                    <r>
+                      <c>https://wd3-impl-services1.workday.com/ccx/service/customreport2/salvationarmy1/T00145/IPS_Worker_Data?format=json</c>
+                    </r>
+                  </Data>
+                </Configuration>
+                <Annotation DisplayMode="0">
+                  <Name />
+                  <DefaultAnnotationText />
+                  <Left value="False" />
+                </Annotation>
+              </Properties>
+              <EngineSettings EngineDll="AlteryxBasePluginsEngine.dll" EngineDllEntryPoint="AlteryxTextInput" />
+            </Node>
+            <Node ToolID="2">
+              <GuiSettings Plugin="AlteryxBasePluginsGui.AlteryxSelect.AlteryxSelect">
+                <Position x="284" y="179" />
+              </GuiSettings>
+              <Properties>
+                <Configuration>
+                  <OrderChanged value="False" />
+                  <CommaDecimal value="False" />
+                  <SelectFields>
+                    <SelectField field="URL" selected="False" />
+                    <SelectField field="DownloadHeaders" selected="False" />
+                    <SelectField field="*Unknown" selected="True" />
+                  </SelectFields>
+                </Configuration>
+                <Annotation DisplayMode="0">
+                  <Name />
+                  <DefaultAnnotationText />
+                  <Left value="False" />
+                </Annotation>
+              </Properties>
+              <EngineSettings EngineDll="AlteryxBasePluginsEngine.dll" EngineDllEntryPoint="AlteryxSelect" />
+            </Node>
+            <Node ToolID="3">
+              <GuiSettings Plugin="AlteryxConnectorGui.Download.Download">
+                <Position x="188" y="179" />
+              </GuiSettings>
+              <Properties>
+                <Configuration>
+                  <URLField>URL</URLField>
+                  <OutputMode>String</OutputMode>
+                  <CodePage>65001</CodePage>
+                  <EncodeURLs value="True" />
+                  <Headers>
+                    <NameValues />
+                    <Fields orderChanged="False">
+                      <Field name="URL" selected="False" />
+                      <Field name="*Unknown" selected="False" />
+                    </Fields>
+                  </Headers>
+                  <Payload>
+                    <HTTPAction>GET</HTTPAction>
+                    <QueryStringBodyMode>Compose</QueryStringBodyMode>
+                    <ComposeNameValues />
+                    <ComposeFields orderChanged="False">
+                      <Field name="URL" selected="False" />
+                      <Field name="*Unknown" selected="False" />
+                    </ComposeFields>
+                  </Payload>
+                  <UserName>T00139</UserName>
+                  <Password>4423A8B7FC6E4E5064F949FC7B8423A49A824A9ACED61</Password>
+                  <numConnections>2</numConnections>
+                  <Timeout>600</Timeout>
+                </Configuration>
+                <Annotation DisplayMode="0">
+                  <Name />
+                  <DefaultAnnotationText />
+                  <Left value="False" />
+                </Annotation>
+              </Properties>
+              <EngineSettings EngineDll="AlteryxConnectorEngine.dll" EngineDllEntryPoint="AlteryxDownload" />
+            </Node>
+          </ChildNodes>
+        </Node>
+        <Node ToolID="15">
+          <GuiSettings Plugin="AlteryxGuiToolkit.ToolContainer.ToolContainer">
+            <Position x="271" y="286" width="829" height="417" />
+          </GuiSettings>
+          <Properties>
+            <Configuration>
+              <Caption>Transform the New Hires Data</Caption>
+              <Style TextColor="#314c4a" FillColor="#b3d9ff" BorderColor="#314c4a" Transparency="25" Margin="25" />
+              <Disabled value="False" />
+              <Folded value="False" />
+            </Configuration>
+            <Annotation DisplayMode="0">
+              <Name />
+              <DefaultAnnotationText />
+              <Left value="False" />
+            </Annotation>
+          </Properties>
+          <ChildNodes>
+            <Node ToolID="5">
+              <GuiSettings Plugin="AlteryxBasePluginsGui.JSONParse.JSONParse">
+                <Position x="296" y="335" />
+              </GuiSettings>
+              <Properties>
+                <Configuration>
+                  <JSON_Field>DownloadData</JSON_Field>
+                  <IncludeInOutput value="False" />
+                  <SingleField value="True" />
+                </Configuration>
+                <Annotation DisplayMode="0">
+                  <Name />
+                  <AnnotationText>Json Parse</AnnotationText>
+                  <DefaultAnnotationText>Json Parse</DefaultAnnotationText>
+                  <Left value="False" />
+                </Annotation>
+              </Properties>
+              <EngineSettings EngineDll="AlteryxBasePluginsEngine.dll" EngineDllEntryPoint="AlteryxJSONParse" />
+            </Node>
+            <Node ToolID="6">
+              <GuiSettings Plugin="AlteryxBasePluginsGui.TextToColumns.TextToColumns">
+                <Position x="404" y="335" />
+              </GuiSettings>
+              <Properties>
+                <Configuration>
+                  <Field>JSON_Name</Field>
+                  <ErrorHandling>Last</ErrorHandling>
+                  <RootName>JSON_Name</RootName>
+                  <Delimeters value="." />
+                  <NumFields value="4" />
+                  <Flags value="0" />
+                </Configuration>
+                <Annotation DisplayMode="0">
+                  <Name />
+                  <DefaultAnnotationText />
+                  <Left value="False" />
+                </Annotation>
+              </Properties>
+              <EngineSettings EngineDll="AlteryxBasePluginsEngine.dll" EngineDllEntryPoint="AlteryxTextToColumns" />
+            </Node>
+            <Node ToolID="7">
+              <GuiSettings Plugin="AlteryxBasePluginsGui.AlteryxSelect.AlteryxSelect">
+                <Position x="500" y="335" />
+              </GuiSettings>
+              <Properties>
+                <Configuration>
+                  <OrderChanged value="True" />
+                  <CommaDecimal value="False" />
+                  <SelectFields>
+                    <SelectField field="JSON_Name" selected="False" />
+                    <SelectField field="JSON_Name3" selected="True" />
+                    <SelectField field="JSON_ValueString" selected="True" />
+                    <SelectField field="JSON_Name1" selected="False" />
+                    <SelectField field="JSON_Name2" selected="True" type="Double" size="8" />
+                    <SelectField field="JSON_Name4" selected="False" />
+                    <SelectField field="*Unknown" selected="True" />
+                  </SelectFields>
+                </Configuration>
+                <Annotation DisplayMode="0">
+                  <Name />
+                  <DefaultAnnotationText />
+                  <Left value="False" />
+                </Annotation>
+              </Properties>
+              <EngineSettings EngineDll="AlteryxBasePluginsEngine.dll" EngineDllEntryPoint="AlteryxSelect" />
+            </Node>
+            <Node ToolID="8">
+              <GuiSettings Plugin="AlteryxBasePluginsGui.CrossTab.CrossTab">
+                <Position x="632" y="335" />
+              </GuiSettings>
+              <Properties>
+                <Configuration>
+                  <GroupFields>
+                    <Field field="JSON_Name2" />
+                  </GroupFields>
+                  <HeaderField field="JSON_Name3" />
+                  <DataField field="JSON_ValueString" />
+                  <Methods>
+                    <Method method="Concat" />
+                    <Separator>,</Separator>
+                    <FieldSize value="2048" />
+                  </Methods>
+                </Configuration>
+                <Annotation DisplayMode="0">
+                  <Name />
+                  <DefaultAnnotationText />
+                  <Left value="False" />
+                </Annotation>
+                <MetaInfo connection="Output">
+                  <RecordInfo>
+                    <Field description="TextToColumns: Parsed from JSON_Name" name="JSON_Name2" source="CrossTab:Group:Concat:" type="Double" />
+                    <Field name="Active_Status" size="2048" source="CrossTab:Header:JSON_Name3:Active_Status:Concat:" type="V_WString" />
+                    <Field name="Appointment_Name" size="2048" source="CrossTab:Header:JSON_Name3:Appointment_Name:Concat:" type="V_WString" />
+                    <Field name="Appointment_Start_Date" size="2048" source="CrossTab:Header:JSON_Name3:Appointment_Start_Date:Concat:" type="V_WString" />
+                    <Field name="Base_Service_Date" size="2048" source="CrossTab:Header:JSON_Name3:Base_Service_Date:Concat:" type="V_WString" />
+                    <Field name="Commissioning_Date" size="2048" source="CrossTab:Header:JSON_Name3:Commissioning_Date:Concat:" type="V_WString" />
+                    <Field name="dateOfBirth" size="2048" source="CrossTab:Header:JSON_Name3:dateOfBirth:Concat:" type="V_WString" />
+                    <Field name="Discipline_Issues" size="2048" source="CrossTab:Header:JSON_Name3:Discipline_Issues:Concat:" type="V_WString" />
+                    <Field name="Employment_Start_Date" size="2048" source="CrossTab:Header:JSON_Name3:Employment_Start_Date:Concat:" type="V_WString" />
+                    <Field name="Employment_Title" size="2048" source="CrossTab:Header:JSON_Name3:Employment_Title:Concat:" type="V_WString" />
+                    <Field name="Gender" size="2048" source="CrossTab:Header:JSON_Name3:Gender:Concat:" type="V_WString" />
+                    <Field name="Health_Concerns" size="2048" source="CrossTab:Header:JSON_Name3:Health_Concerns:Concat:" type="V_WString" />
+                    <Field name="Legal_Name___First_Name" size="2048" source="CrossTab:Header:JSON_Name3:Legal_Name_-_First_Name:Concat:" type="V_WString" />
+                    <Field name="Legal_Name___Last_Name" size="2048" source="CrossTab:Header:JSON_Name3:Legal_Name_-_Last_Name:Concat:" type="V_WString" />
+                    <Field name="Location___Name" size="2048" source="CrossTab:Header:JSON_Name3:Location_-_Name:Concat:" type="V_WString" />
+                    <Field name="Position_Start_Date" size="2048" source="CrossTab:Header:JSON_Name3:Position_Start_Date:Concat:" type="V_WString" />
+                    <Field name="Preferred_Name___First_Name" size="2048" source="CrossTab:Header:JSON_Name3:Preferred_Name_-_First_Name:Concat:" type="V_WString" />
+                    <Field name="Promotion" size="2048" source="CrossTab:Header:JSON_Name3:Promotion:Concat:" type="V_WString" />
+                    <Field name="Type" size="2048" source="CrossTab:Header:JSON_Name3:Type:Concat:" type="V_WString" />
+                    <Field name="User_Name" size="2048" source="CrossTab:Header:JSON_Name3:User_Name:Concat:" type="V_WString" />
+                    <Field name="Worker_ID" size="2048" source="CrossTab:Header:JSON_Name3:Worker_ID:Concat:" type="V_WString" />
+                  </RecordInfo>
+                  <SortInfo>
+                    <Field field="JSON_Name2" order="Asc" />
+                  </SortInfo>
+                </MetaInfo>
+              </Properties>
+              <EngineSettings EngineDll="AlteryxBasePluginsEngine.dll" EngineDllEntryPoint="AlteryxCrossTab" />
+            </Node>
+            <Node ToolID="9">
+              <GuiSettings Plugin="AlteryxBasePluginsGui.Sort.Sort">
+                <Position x="764" y="335" />
+              </GuiSettings>
+              <Properties>
+                <Configuration>
+                  <SortInfo locale="0">
+                    <Field field="JSON_Name2" order="Ascending" />
+                  </SortInfo>
+                </Configuration>
+                <Annotation DisplayMode="0">
+                  <Name />
+                  <DefaultAnnotationText>JSON_Name2 - Ascending</DefaultAnnotationText>
+                  <Left value="False" />
+                </Annotation>
+              </Properties>
+              <EngineSettings EngineDll="AlteryxBasePluginsEngine.dll" EngineDllEntryPoint="AlteryxSort" />
+            </Node>
+            <Node ToolID="10">
+              <GuiSettings Plugin="AlteryxBasePluginsGui.AlteryxSelect.AlteryxSelect">
+                <Position x="896" y="335" />
+              </GuiSettings>
+              <Properties>
+                <Configuration>
+                  <OrderChanged value="True" />
+                  <CommaDecimal value="False" />
+                  <SelectFields>
+                    <SelectField field="JSON_Name2" selected="True" rename="Record Key" />
+                    <SelectField field="Active_Status" selected="False" />
+                    <SelectField field="Legal_Name___First_Name" selected="True" rename="firstName" />
+                    <SelectField field="Legal_Name___Last_Name" selected="True" rename="lastName" />
+                    <SelectField field="Gender" selected="True" rename="sex" />
+                    <SelectField field="Appointment_Name" selected="False" />
+                    <SelectField field="Appointment_Start_Date" selected="True" rename="rankDate" />
+                    <SelectField field="Base_Service_Date" selected="False" />
+                    <SelectField field="Commissioning_Date" selected="False" />
+                    <SelectField field="dateOfBirth" selected="True" />
+                    <SelectField field="Discipline_Issues" selected="False" />
+                    <SelectField field="Employment_Start_Date" selected="False" />
+                    <SelectField field="Employment_Title" selected="False" />
+                    <SelectField field="Health_Concerns" selected="False" />
+                    <SelectField field="Location___Name" selected="True" />
+                    <SelectField field="Position_Start_Date" selected="False" />
+                    <SelectField field="Preferred_Name___First_Name" selected="False" />
+                    <SelectField field="Promotion" selected="False" />
+                    <SelectField field="Type" selected="False" />
+                    <SelectField field="User_Name" selected="False" />
+                    <SelectField field="Worker_ID" selected="False" />
+                    <SelectField field="*Unknown" selected="True" />
+                  </SelectFields>
+                </Configuration>
+                <Annotation DisplayMode="0">
+                  <Name />
+                  <DefaultAnnotationText />
+                  <Left value="False" />
+                </Annotation>
+              </Properties>
+              <EngineSettings EngineDll="AlteryxBasePluginsEngine.dll" EngineDllEntryPoint="AlteryxSelect" />
+            </Node>
+            <Node ToolID="11">
+              <GuiSettings>
+                <Position x="824" y="455" />
+              </GuiSettings>
+              <Properties>
+                <Configuration>
+                  <Value name="List Box (11)">"Record Key","firstName","lastName","sex","rankDate","dateOfBirth","Location___Name"</Value>
+                  <Value name="Check Box (84)">False</Value>
+                  <Value name="Check Box (117)">False</Value>
+                  <Value name="Check Box (15)">True</Value>
+                  <Value name="Check Box (109)">False</Value>
+                  <Value name="Check Box (122)">False</Value>
+                  <Value name="Check Box (53)">False</Value>
+                  <Value name="Check Box (58)">False</Value>
+                  <Value name="Check Box (70)">False</Value>
+                  <Value name="Check Box (77)">False</Value>
+                  <Value name="Drop Down (81)">upper</Value>
+                </Configuration>
+                <Annotation DisplayMode="0">
+                  <Name />
+                  <DefaultAnnotationText />
+                  <Left value="False" />
+                </Annotation>
+              </Properties>
+              <EngineSettings Macro="Cleanse.yxmc" />
+            </Node>
+            <Node ToolID="12">
+              <GuiSettings Plugin="AlteryxBasePluginsGui.Formula.Formula">
+                <Position x="704" y="527" />
+              </GuiSettings>
+              <Properties>
+                <Configuration>
+                  <FormulaFields>
+                    <FormulaField expression="IIF(Contains([sex], &quot;Male&quot;), &quot;M&quot;, &quot;F&quot;)" field="sex" size="2048" type="V_WString" />
+                    <FormulaField expression="9" field="rankId" size="8" type="Double" />
+                    <FormulaField expression="IIF(!IsEmpty([dateOfBirth]), [dateOfBirth]+&quot;T00:00:00Z&quot;, &quot;1970-12-21&quot;+&quot;T00:00:00Z&quot;)" field="dateOfBirth" size="2048" type="V_WString" />
+                    <FormulaField expression="11" field="birthCountryId" size="8" type="Double" />
+                    <FormulaField expression="1" field="homeTerritoryId" size="8" type="Double" />
+                    <FormulaField expression="[rankDate]+&quot;T00:00:00Z&quot;" field="rankDate" size="2048" type="V_WString" />
+                  </FormulaFields>
+                </Configuration>
+                <Annotation DisplayMode="0">
+                  <Name />
+                  <DefaultAnnotationText>sex = IIF(Contains([sex], "Male"), "M", "F")
+rankId = 9
+dateOfBirth = IIF(!IsEmp...</DefaultAnnotationText>
+                  <Left value="False" />
+                </Annotation>
+              </Properties>
+              <EngineSettings EngineDll="AlteryxBasePluginsEngine.dll" EngineDllEntryPoint="AlteryxFormula" />
+            </Node>
+            <Node ToolID="13">
+              <GuiSettings Plugin="AlteryxBasePluginsGui.AlteryxSelect.AlteryxSelect">
+                <Position x="848" y="527" />
+              </GuiSettings>
+              <Properties>
+                <Configuration>
+                  <OrderChanged value="False" />
+                  <CommaDecimal value="False" />
+                  <SelectFields>
+                    <SelectField field="Record Key" selected="True" />
+                    <SelectField field="firstName" selected="True" />
+                    <SelectField field="lastName" selected="True" />
+                    <SelectField field="sex" selected="True" />
+                    <SelectField field="rankDate" selected="True" />
+                    <SelectField field="dateOfBirth" selected="True" />
+                    <SelectField field="rankId" selected="True" />
+                    <SelectField field="birthCountryId" selected="True" />
+                    <SelectField field="homeTerritoryId" selected="True" />
+                    <SelectField field="First Name" selected="False" rename="firstName" />
+                    <SelectField field="Last Name" selected="False" rename="lastName" />
+                    <SelectField field="*Unknown" selected="False" />
+                  </SelectFields>
+                </Configuration>
+                <Annotation DisplayMode="0">
+                  <Name />
+                  <DefaultAnnotationText />
+                  <Left value="False" />
+                </Annotation>
+              </Properties>
+              <EngineSettings EngineDll="AlteryxBasePluginsEngine.dll" EngineDllEntryPoint="AlteryxSelect" />
+            </Node>
+            <Node ToolID="14">
+              <GuiSettings Plugin="AlteryxBasePluginsGui.Transpose.Transpose">
+                <Position x="1016" y="383" />
+              </GuiSettings>
+              <Properties>
+                <Configuration>
+                  <ErrorWarn>Warn</ErrorWarn>
+                  <KeyFields>
+                    <Field field="Record Key" />
+                  </KeyFields>
+                  <DataFields>
+                    <Field field="Record Key" selected="False" />
+                    <Field field="firstName" selected="True" />
+                    <Field field="lastName" selected="True" />
+                    <Field field="sex" selected="True" />
+                    <Field field="rankDate" selected="True" />
+                    <Field field="dateOfBirth" selected="True" />
+                    <Field field="rankId" selected="True" />
+                    <Field field="birthCountryId" selected="True" />
+                    <Field field="homeTerritoryId" selected="True" />
+                    <Field field="*Unknown" selected="True" />
+                  </DataFields>
+                </Configuration>
+                <Annotation DisplayMode="0">
+                  <Name />
+                  <DefaultAnnotationText />
+                  <Left value="False" />
+                </Annotation>
+              </Properties>
+              <EngineSettings EngineDll="AlteryxBasePluginsEngine.dll" EngineDllEntryPoint="AlteryxTranspose" />
+            </Node>
+          </ChildNodes>
+        </Node>
+        <Node ToolID="21">
+          <GuiSettings Plugin="AlteryxGuiToolkit.ToolContainer.ToolContainer">
+            <Position x="1111" y="106" width="565" height="233" />
+          </GuiSettings>
+          <Properties>
+            <Configuration>
+              <Caption>Transfer data to IPS server</Caption>
+              <Style TextColor="#314c4a" FillColor="#cecece" BorderColor="#314c4a" Transparency="10" Margin="25" />
+              <Disabled value="False" />
+              <Folded value="False" />
+            </Configuration>
+            <Annotation DisplayMode="0">
+              <Name />
+              <DefaultAnnotationText />
+              <Left value="False" />
+            </Annotation>
+          </Properties>
+          <ChildNodes>
+            <Node ToolID="16">
+              <GuiSettings Plugin="AlteryxBasePluginsGui.TextInput.TextInput">
+                <Position x="1136" y="239" />
+              </GuiSettings>
+              <Properties>
+                <Configuration>
+                  <NumRows value="1" />
+                  <Fields>
+                    <Field name="URL" />
+                  </Fields>
+                  <Data>
+                    <r>
+                      <c>https://qaips.salvationarmy.org/mvc/api/person/simple</c>
+                    </r>
+                  </Data>
+                </Configuration>
+                <Annotation DisplayMode="0">
+                  <Name />
+                  <AnnotationText>URL</AnnotationText>
+                  <DefaultAnnotationText>URL</DefaultAnnotationText>
+                  <Left value="False" />
+                </Annotation>
+              </Properties>
+              <EngineSettings EngineDll="AlteryxBasePluginsEngine.dll" EngineDllEntryPoint="AlteryxTextInput" />
+            </Node>
+            <Node ToolID="17">
+              <GuiSettings Plugin="AlteryxConnectorGui.Download.Download">
+                <Position x="1448" y="155" />
+              </GuiSettings>
+              <Properties>
+                <Configuration>
+                  <URLField>URL</URLField>
+                  <OutputMode>String</OutputMode>
+                  <CodePage>65001</CodePage>
+                  <EncodeURLs value="False" />
+                  <Headers>
+                    <NameValues>
+                      <Item name="Content-Type" value="application/json;charset=utf-8" />
+                      <Item name="Authorization" value="Basic YXVzLmRldmVsb3BlckBzYWx2YXRpb25hcm15Lm9yZzphZGV2MzEw" />
+                    </NameValues>
+                    <Fields orderChanged="False">
+                      <Field name="JSON" />
+                      <Field name="Record Key" selected="False" />
+                      <Field name="URL" selected="False" />
+                      <Field name="*Unknown" selected="False" />
+                    </Fields>
+                  </Headers>
+                  <Payload>
+                    <HTTPAction>Custom</HTTPAction>
+                    <CustomHTTPAction>PUT</CustomHTTPAction>
+                    <QueryStringBodyMode>Field</QueryStringBodyMode>
+                    <Field>JSON</Field>
+                  </Payload>
+                  <UserName>aus.developer@salvationarmy.org</UserName>
+                  <Password>4C967F15DA1BE3C1A8289139702D8A6A32A24</Password>
+                  <numConnections>2</numConnections>
+                  <Timeout>600</Timeout>
+                </Configuration>
+                <Annotation DisplayMode="0">
+                  <Name />
+                  <DefaultAnnotationText />
+                  <Left value="False" />
+                </Annotation>
+              </Properties>
+              <EngineSettings EngineDll="AlteryxConnectorEngine.dll" EngineDllEntryPoint="AlteryxDownload" />
+            </Node>
+            <Node ToolID="18">
+              <GuiSettings Plugin="AlteryxBasePluginsGui.AppendFields.AppendFields">
+                <Position x="1196" y="155" />
+              </GuiSettings>
+              <Properties>
+                <Configuration>
+                  <CartesianMode>Error</CartesianMode>
+                  <SelectConfiguration>
+                    <Configuration outputConnection="Output">
+                      <OrderChanged value="False" />
+                      <CommaDecimal value="False" />
+                      <SelectFields>
+                        <SelectField field="*Unknown" selected="True" />
+                      </SelectFields>
+                    </Configuration>
+                  </SelectConfiguration>
+                </Configuration>
+                <Annotation DisplayMode="0">
+                  <Name />
+                  <DefaultAnnotationText />
+                  <Left value="False" />
+                </Annotation>
+              </Properties>
+              <EngineSettings EngineDll="AlteryxBasePluginsEngine.dll" EngineDllEntryPoint="AlteryxAppendFields" />
+            </Node>
+            <Node ToolID="19">
+              <GuiSettings Plugin="AlteryxBasePluginsGui.JSONBuild.JSONBuild">
+                <Position x="1316" y="155" />
+              </GuiSettings>
+              <Properties>
+                <Configuration>
+                  <Name_Field>Name</Name_Field>
+                  <StringValue_Field>Value</StringValue_Field>
+                  <IntValue_Field />
+                  <FloatValue_Field />
+                  <BoolValue_Field />
+                  <GroupFields orderChanged="False">
+                    <Field name="Record Key" />
+                    <Field name="URL" />
+                  </GroupFields>
+                </Configuration>
+                <Annotation DisplayMode="0">
+                  <Name />
+                  <AnnotationText>Build JSON payload for post request</AnnotationText>
+                  <DefaultAnnotationText>Build JSON payload for post request</DefaultAnnotationText>
+                  <Left value="False" />
+                </Annotation>
+              </Properties>
+              <EngineSettings EngineDll="AlteryxBasePluginsEngine.dll" EngineDllEntryPoint="AlteryxJSONBuild" />
+            </Node>
+            <Node ToolID="20">
+              <GuiSettings Plugin="AlteryxBasePluginsGui.BrowseV2.BrowseV2">
+                <Position x="1592" y="155" />
+              </GuiSettings>
+              <Properties>
+                <Configuration>
+                  <TempFile>
+                  </TempFile>
+                  <TempFileDataProfiling />
+                  <Layout>
+                    <ViewMode>Single</ViewMode>
+                    <ViewSize value="100" />
+                    <View1>
+                      <DefaultTab>Profile</DefaultTab>
+                      <Hints>
+                        <Table />
+                      </Hints>
+                    </View1>
+                    <View2 />
+                  </Layout>
+                </Configuration>
+                <Annotation DisplayMode="0">
+                  <Name />
+                  <DefaultAnnotationText />
+                  <Left value="False" />
+                </Annotation>
+              </Properties>
+              <EngineSettings EngineDll="AlteryxBasePluginsEngine.dll" EngineDllEntryPoint="AlteryxBrowseV2" />
+            </Node>
+          </ChildNodes>
+        </Node>
+      </ChildNodes>
+    </Node>
+  </Nodes>
+  <Connections>
+    <Connection>
+      <Origin ToolID="1" Connection="Output" />
+      <Destination ToolID="3" Connection="Input" />
+    </Connection>
+    <Connection>
+      <Origin ToolID="2" Connection="Output" />
+      <Destination ToolID="5" Connection="Input" />
+    </Connection>
+    <Connection>
+      <Origin ToolID="3" Connection="Output" />
+      <Destination ToolID="2" Connection="Input" />
+    </Connection>
+    <Connection>
+      <Origin ToolID="5" Connection="Output" />
+      <Destination ToolID="6" Connection="Input" />
+    </Connection>
+    <Connection>
+      <Origin ToolID="6" Connection="Output" />
+      <Destination ToolID="7" Connection="Input" />
+    </Connection>
+    <Connection>
+      <Origin ToolID="7" Connection="Output" />
+      <Destination ToolID="8" Connection="Input" />
+    </Connection>
+    <Connection>
+      <Origin ToolID="8" Connection="Output" />
+      <Destination ToolID="9" Connection="Input" />
+    </Connection>
+    <Connection>
+      <Origin ToolID="9" Connection="Output" />
+      <Destination ToolID="10" Connection="Input" />
+    </Connection>
+    <Connection>
+      <Origin ToolID="10" Connection="Output" />
+      <Destination ToolID="11" Connection="Input2" />
+    </Connection>
+    <Connection>
+      <Origin ToolID="11" Connection="Output26" />
+      <Destination ToolID="12" Connection="Input" />
+    </Connection>
+    <Connection>
+      <Origin ToolID="12" Connection="Output" />
+      <Destination ToolID="13" Connection="Input" />
+    </Connection>
+    <Connection>
+      <Origin ToolID="13" Connection="Output" />
+      <Destination ToolID="14" Connection="Input" />
+    </Connection>
+    <Connection>
+      <Origin ToolID="14" Connection="Output" />
+      <Destination ToolID="18" Connection="Targets" />
+    </Connection>
+    <Connection>
+      <Origin ToolID="16" Connection="Output" />
+      <Destination ToolID="18" Connection="Source" />
+    </Connection>
+    <Connection>
+      <Origin ToolID="17" Connection="Output" />
+      <Destination ToolID="20" Connection="Input" />
+    </Connection>
+    <Connection>
+      <Origin ToolID="18" Connection="Output" />
+      <Destination ToolID="19" Connection="Input" />
+    </Connection>
+    <Connection>
+      <Origin ToolID="19" Connection="Output" />
+      <Destination ToolID="17" Connection="Input" />
+    </Connection>
+  </Connections>
+  <Properties>
+    <Memory default="True" />
+    <GlobalRecordLimit value="0" />
+    <TempFiles default="True" />
+    <Annotation on="True" includeToolName="False" />
+    <ConvErrorLimit value="10" />
+    <ConvErrorLimit_Stop value="False" />
+    <CancelOnError value="False" />
+    <DisableBrowse value="False" />
+    <EnablePerformanceProfiling value="False" />
+    <DisableAllOutput value="False" />
+    <ShowAllMacroMessages value="False" />
+    <ShowConnectionStatusIsOn value="True" />
+    <ShowConnectionStatusOnlyWhenRunning value="True" />
+    <ZoomLevel value="0" />
+    <LayoutType>Horizontal</LayoutType>
+    <MetaInfo>
+      <NameIsFileName value="True" />
+      <Name>Exhibit 5 - Workday New Hire API Integration</Name>
+      <Description />
+      <RootToolName />
+      <ToolVersion />
+      <ToolInDb value="False" />
+      <CategoryName />
+      <SearchTags />
+      <Author />
+      <Company />
+      <Copyright />
+      <DescriptionLink actual="" displayed="" />
+      <Example>
+        <Description />
+        <File />
+      </Example>
+    </MetaInfo>
+    <Events>
+      <Enabled value="True" />
+    </Events>
+  </Properties>
+</AlteryxDocument>
