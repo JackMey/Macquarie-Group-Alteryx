@@ -1,0 +1,41 @@
+{
+  "compilerOptions": {
+    "baseUrl": ".",
+    "outDir": "build",
+    "module": "esnext",
+    "target": "es6",
+    "lib": [
+      "esnext",
+      "dom"
+    ],
+    "sourceMap": true,
+    "jsx": "react",
+    "moduleResolution": "node",
+    "esModuleInterop": true,
+    "forceConsistentCasingInFileNames": true,
+    "noImplicitThis": true,
+    "strictNullChecks": true,
+    "strict": false,
+    "allowSyntheticDefaultImports": true,
+    "suppressImplicitAnyIndexErrors": true,
+    "noUnusedLocals": true,
+    "noUnusedParameters": true,
+    "types": [
+      "node",
+      "jest",
+      "enzyme"
+    ],
+    "paths": {
+      "~/*": ["./src/*"],
+      "~/models": ["./src/models"]
+    }
+  },
+  "exclude": [
+    "node_modules",
+    "build",
+    "src/setupTests.ts",
+  ],
+  "include": [
+    "src"
+  ]
+}
